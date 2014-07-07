@@ -9,43 +9,73 @@
 #import "UIWebView+Custom.h"
 #import <objc/objc-runtime.h>
 #import "JRSwizzle.h"
+#import "ViewController.h"
 
 @implementation UIWebView (UIWebViewDelegate)
 
 + (void)load
 {
-    
     Method original, swizzle;
     
-    original = class_getInstanceMethod(self, @selector(webViewDidStartLoad:));
-    swizzle  = class_getInstanceMethod(self, @selector(swizzled_webViewDidStartLoad:));
+    original = class_getInstanceMethod([UIWebView class], @selector(setDelegate:));
+    swizzle  = class_getInstanceMethod(self, @selector(swizzled_setDelegate:));
     
-    /*BOOL methodAdded = class_addMethod([self class],
+    method_exchangeImplementations(original, swizzle);
+    
+    /*BOOL methodAdded = class_addMethod([UIWebView class],
                                        @selector(webViewDidStartLoad:),
                                        method_getImplementation(swizzle),
                                        method_getTypeEncoding(swizzle));
     
-    if (methodAdded) {
+    if (!methodAdded) {
         class_replaceMethod([self class],
                             @selector(swizzled_webViewDidStartLoad:),
                             method_getImplementation(original),
                             method_getTypeEncoding(original));
     } else {
         method_exchangeImplementations(original, swizzle);
-    }
+    }*/
     
     
     
-    original = class_getInstanceMethod(self, @selector(loadHTMLString:baseURL:));
+    /*original = class_getInstanceMethod(self, @selector(loadHTMLString:baseURL:));
     swizzle  = class_getInstanceMethod(self, @selector(swizzled_loadHTMLString:baseURL:));
     method_exchangeImplementations(original, swizzle);*/
-    NSError *err;
+    /*NSError *err;
     [self jr_swizzleMethod:@selector(swizzled_webViewDidStartLoad:) withMethod:@selector(webViewDidStartLoad:) error:&err];
     if(err)
-        NSLog(@"ERROR: %@", err);
+        NSLog(@"ERROR: %@", err);*/
     //[self jr_swizzleClassMethod:@selector(swizzled_webViewDidStartLoad:) withClassMethod:@selector(webViewDidStartLoad:) error:NULL];
 }
 
+- (id) webViewDelegate {
+    return objc_getAssociatedObject(self, @selector(webViewDelegate));
+}
+
+- (void)setWebViewDelegate: (id) delegate {
+    objc_setAssociatedObject(self, @selector(webViewDelegate), delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)swizzled_setDelegate: (id)delegate
+{
+    self.webViewDelegate = delegate;
+    
+    Method original = class_getInstanceMethod([delegate class], @selector(webViewDidFinishLoad:));
+    Method swizzle = class_getInstanceMethod([self class], @selector(swizzled_webViewDidFinishLoad:));
+    if(original)
+        method_exchangeImplementations(original, swizzle);
+    
+    [self swizzled_setDelegate:delegate];
+    
+    NSLog(@"method swizzled_setDelegate...");
+}
+
+
+- (void)swizzled_webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.webViewDelegate webViewDidFinishLoad:webView];
+    NSLog(@"method swizzled_webViewDidStartLoad......");
+}
 
 - (void)swizzled_webViewDidStartLoad:(UIWebView *)webView
 {

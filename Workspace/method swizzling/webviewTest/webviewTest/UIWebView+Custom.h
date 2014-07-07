@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIWebView (UIWebViewDelegate)
+@interface UIWebView (UIWebViewDelegate) <UIWebViewDelegate>
+
+@property (nonatomic, retain) id webViewDelegate;
 
 @end
