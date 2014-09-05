@@ -11,4 +11,5 @@
 @interface ViewController : UIViewController<UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
 @end
