@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>96C05513-39DB-4501-AC92-CA30ED844252</string>
+	<key>IDESourceControlProjectName</key>
+	<string>webviewTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>93E50F3B-E57A-4203-B482-7096AD5F3000</key>
+		<string>https://github.com/mayur-gauswami/iOS-Stuffs.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Workspace/method swizzling/webviewTest/webviewTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>93E50F3B-E57A-4203-B482-7096AD5F3000</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mayur-gauswami/iOS-Stuffs.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>93E50F3B-E57A-4203-B482-7096AD5F3000</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>93E50F3B-E57A-4203-B482-7096AD5F3000</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOS-Stuffs</string>
+		</dict>
+	</array>
+</dict>
+</plist>

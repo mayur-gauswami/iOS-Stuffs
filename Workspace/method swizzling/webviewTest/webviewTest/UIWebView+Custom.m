@@ -10,7 +10,7 @@
 #import <objc/objc-runtime.h>
 #import "JRSwizzle.h"
 
-@implementation UIWebView (UIWebViewDelegate)
+@implementation UIWebView (Custom)
 
 + (void)load
 {
@@ -39,6 +39,9 @@
     original = class_getInstanceMethod(self, @selector(loadHTMLString:baseURL:));
     swizzle  = class_getInstanceMethod(self, @selector(swizzled_loadHTMLString:baseURL:));
     method_exchangeImplementations(original, swizzle);*/
+
+    
+    /* Using JR_Swizzle */
     NSError *err;
     [self jr_swizzleMethod:@selector(swizzled_webViewDidStartLoad:) withMethod:@selector(webViewDidStartLoad:) error:&err];
     if(err)
